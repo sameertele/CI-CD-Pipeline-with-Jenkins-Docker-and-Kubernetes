@@ -75,12 +75,13 @@ pipeline {
             steps {
                 script {
                     def kubectlBinPath = '/usr/local/bin' // <-- YOUR KUBECTL BINARY DIRECTORY HERE
-
+                    
                     withEnv(["PATH=${kubectlBinPath}:${env.PATH}"]) {
                         echo "Deploying to Kubernetes..."
                         sh "kubectl apply -f kubernetes/deployment.yaml"
                         sh "kubectl apply -f kubernetes/service.yaml"
                         echo "Deployment to Kubernetes complete."
+                    }
                 }
             }
         }
