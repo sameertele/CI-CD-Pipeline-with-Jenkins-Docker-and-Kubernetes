@@ -63,10 +63,6 @@ pipeline {
                         echo "Pushing Docker image to registry: ${dockerImage}:${dockerTag}"
                         withCredentials([usernamePassword(credentialsId: env.DOCKER_HUB_CREDENTIALS, passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
                             sh "docker push ${dockerImage}:${dockerTag}"
-                            // --- NEW STEP: Logout after push (good practice) ---
-                            sh "docker logout"
-                            echo "Logged out from Docker Hub."
-                            // --- END NEW STEP ---
                         }
                     }
                 }
