@@ -40,6 +40,10 @@ pipeline {
                 script {
                     def dockerBinPath = '/usr/local/bin' // <-- YOUR DOCKER BINARY DIRECTORY HERE
                     withEnv(["PATH=${dockerBinPath}:${env.PATH}"]){
+                        withCredentials([usernamePassword(credentialsId: env.DOCKER_HUB_CREDENTIALS, passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
+                            sh "docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}"
+                            echo "Logged into Docker Hub. Starting Docker build..."
+                        }
                     echo "Building Docker image: ${dockerImage}:${dockerTag}"
                     // Build the Docker image using the Dockerfile in the current directory
                     // The 'docker.build()' command is provided by the Docker Pipeline plugin
@@ -54,13 +58,16 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 script {
-                    echo "Pushing Docker image to registry: ${dockerImage}:${dockerTag}"
-                    // Get Docker Hub credentials
-                    withCredentials([usernamePassword(credentialsId: env.DOCKER_HUB_CREDENTIALS, passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
-                        // Push the image to Docker Hub
-                        sh "docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}"
-                        sh "docker push ${dockerImage}:${dockerTag}"
-                        sh "docker logout" // Log out after pushing
+                    def dockerBinPath = '/usr/local/bin' // <-- YOUR DOCKER BINARY DIRECTORY HERE
+                    withEnv(["PATH=${dockerBinPath}:${env.PATH}"]) {
+                        echo "Pushing Docker image to registry: ${dockerImage}:${dockerTag}"
+                        withCredentials([usernamePassword(credentialsId: env.DOCKER_HUB_CREDENTIALS, passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
+                            sh "docker push ${dockerImage}:${dockerTag}"
+                            // --- NEW STEP: Logout after push (good practice) ---
+                            sh "docker logout"
+                            echo "Logged out from Docker Hub."
+                            // --- END NEW STEP ---
+                        }
                     }
                 }
             }
