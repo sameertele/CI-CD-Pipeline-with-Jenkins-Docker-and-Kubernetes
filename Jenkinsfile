@@ -74,15 +74,13 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
                 script {
-                    echo "Deploying to Kubernetes..."
-                    // Apply Kubernetes deployment and service manifests
-                    // Ensure your Jenkins agent has kubectl configured and authenticated
-                    // You might need to configure a Kubernetes Cloud in Jenkins for this
-                    // or ensure kubectl is available on the agent and configured to connect
-                    // to your cluster.
-                    sh "kubectl apply -f kubernetes/deployment.yaml"
-                    sh "kubectl apply -f kubernetes/service.yaml"
-                    echo "Deployment to Kubernetes complete."
+                    def kubectlBinPath = '/usr/local/bin' // <-- YOUR KUBECTL BINARY DIRECTORY HERE
+
+                    withEnv(["PATH=${kubectlBinPath}:${env.PATH}"]) {
+                        echo "Deploying to Kubernetes..."
+                        sh "kubectl apply -f kubernetes/deployment.yaml"
+                        sh "kubectl apply -f kubernetes/service.yaml"
+                        echo "Deployment to Kubernetes complete."
                 }
             }
         }
