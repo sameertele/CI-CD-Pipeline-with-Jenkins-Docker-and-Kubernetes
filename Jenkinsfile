@@ -4,7 +4,7 @@
 
 // Define environment variables
 def appName = "my-devops-app" // Name of your application
-def dockerRegistry = "your-dockerhub-username" // Replace with your Docker Hub username
+def dockerRegistry = "telesameer" // Replace with your Docker Hub username
 def dockerImage = "${dockerRegistry}/${appName}" // Full Docker image name
 def dockerTag = "latest" // Or use a dynamic tag like env.BUILD_NUMBER
 
@@ -28,7 +28,7 @@ pipeline {
                     // For example, if using a Git repo, configure it in the job settings.
                     // This step is implicitly handled by Jenkins if configured correctly.
                     // For a declarative pipeline, 'checkout scm' is often implied or can be explicit.
-                    git branch: 'main', url: 'https://github.com/your-username/your-repo.git' // REPLACE with your actual Git repo URL
+                    git branch: 'main', url: 'https://github.com/sameertele/CI-CD-Pipeline-with-Jenkins-Docker-and-Kubernetes' // REPLACE with your actual Git repo URL
                 }
             }
         }
