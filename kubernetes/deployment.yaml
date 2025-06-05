@@ -5,7 +5,7 @@ metadata:
   labels:
     app: my-devops-app
 spec:
-  replicas: 1 # You can increase this for more instances
+  replicas: 1 
   selector:
     matchLabels:
       app: my-devops-app
@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: my-devops-app
-        image: telesameer/my-devops-app:latest # REPLACE with your Docker Hub username
+        image: telesameer/my-devops-app:latest
         ports:
         - containerPort: 3000

@@ -1,4 +1,3 @@
-# kubernetes/service.yaml
 apiVersion: v1
 kind: Service
 metadata:
@@ -6,9 +5,9 @@ metadata:
 spec:
   selector:
     app: my-devops-app
-  type: NodePort # Use LoadBalancer for cloud environments, or ClusterIP for internal services
+  type: NodePort 
   ports:
     - protocol: TCP
-      port: 80 # Service port
-      targetPort: 3000 # Container port
-      nodePort: 30001 # Optional: specific port on the node (must be in range 30000-32767)
+      port: 80 
+      targetPort: 3000 
+      nodePort: 30001
