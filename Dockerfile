@@ -2,7 +2,7 @@
 FROM node:18-alpine
 
 # Set the working directory in the container
-WORKDIR /app
+WORKDIR / CI-CD-Pipeline-with-Jenkins-Docker-and-Kubernetes
 
 # Copy package.json and package-lock.json to the working directory
 # This allows Docker to use the cache for npm install if dependencies haven't changed
