@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: my-devops-app
-        image: your-dockerhub-username/my-devops-app:latest # REPLACE with your Docker Hub username
+        image: telesameer/my-devops-app:latest # REPLACE with your Docker Hub username
         ports:
         - containerPort: 3000
