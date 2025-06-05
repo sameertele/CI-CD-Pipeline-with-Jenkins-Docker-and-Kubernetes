@@ -38,10 +38,13 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
+                    def dockerBinPath = '/usr/local/bin' // <-- YOUR DOCKER BINARY DIRECTORY HERE
+                    withEnv(["PATH=${dockerBinPath}:${env.PATH}"]){
                     echo "Building Docker image: ${dockerImage}:${dockerTag}"
                     // Build the Docker image using the Dockerfile in the current directory
                     // The 'docker.build()' command is provided by the Docker Pipeline plugin
                     docker.build("${dockerImage}:${dockerTag}", ".")
+                    }
                 }
             }
         }
