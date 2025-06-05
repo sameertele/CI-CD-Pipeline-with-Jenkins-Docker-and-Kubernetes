@@ -5,7 +5,7 @@ metadata:
   name: my-devops-app-service
 spec:
   selector:
-    app: CI-CD-Pipeline-with-Jenkins-Docker-and-Kubernetes
+    app: my-devops-app
   type: NodePort # Use LoadBalancer for cloud environments, or ClusterIP for internal services
   ports:
     - protocol: TCP

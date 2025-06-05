@@ -3,7 +3,7 @@
 // using Docker and Kubernetes.
 
 // Define environment variables
-def appName = "CI-CD-Pipeline-with-Jenkins-Docker-and-Kubernetes" // Name of your application
+def appName = "my-devops-app" // Name of your application
 def dockerRegistry = "telesameer" // Replace with your Docker Hub username
 def dockerImage = "${dockerRegistry}/${appName}" // Full Docker image name
 def dockerTag = "latest" // Or use a dynamic tag like env.BUILD_NUMBER

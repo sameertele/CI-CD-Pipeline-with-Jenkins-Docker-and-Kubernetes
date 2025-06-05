@@ -3,19 +3,19 @@ kind: Deployment
 metadata:
   name: my-devops-app-deployment
   labels:
-    app: CI-CD-Pipeline-with-Jenkins-Docker-and-Kubernetes
+    app: my-devops-app
 spec:
   replicas: 1 # You can increase this for more instances
   selector:
     matchLabels:
-      app: CI-CD-Pipeline-with-Jenkins-Docker-and-Kubernetes
+      app: my-devops-app
   template:
     metadata:
       labels:
-        app: CI-CD-Pipeline-with-Jenkins-Docker-and-Kubernetes
+        app: my-devops-app
     spec:
       containers:
-      - name: CI-CD-Pipeline-with-Jenkins-Docker-and-Kubernetes
-        image: telesameer/CI-CD-Pipeline-with-Jenkins-Docker-and-Kubernetes:latest # REPLACE with your Docker Hub username
+      - name: my-devops-app
+        image: telesameer/my-devops-app:latest # REPLACE with your Docker Hub username
         ports:
         - containerPort: 3000
