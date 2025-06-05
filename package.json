@@ -1,5 +1,5 @@
 {
-    "name": "my-devops-app",
+    "name": "CI-CD-Pipeline-with-Jenkins-Docker-and-Kubernetes",
     "version": "1.0.0",
     "description": "A simple Node.js app for DevOps pipeline demo",
     "main": "app.js",
